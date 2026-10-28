@@ -1,11 +1,29 @@
 <!DOCTYPE html>
+<!--
+  MeshClean – Free DNS / DoT / DoH directory
+  Copyright (C) 2026 MeshClean contributors
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
 <html lang="tr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#111318" id="tc">
 <title>MeshClean – Free DNS / DoT / DoH</title>
-<meta name="description" content="Ücretsiz ve sınırsız DNS, DoT ve DoH sağlayıcıları. MeshClean.">
+<meta name="description" content="Free, unlimited, live-verified DNS, DoH and DoT providers.">
+<meta name="license" content="GPL-3.0-or-later">
 <link rel="icon" id="fav" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
@@ -17,16 +35,17 @@
 body{font:400 14px/20px Roboto,system-ui,sans-serif;background:var(--bg);color:var(--on);min-height:100vh;transition:background .3s var(--e)}
 .icon{font-family:'Material Symbols Outlined';font-weight:400;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;font-feature-settings:'liga';-webkit-font-smoothing:antialiased;user-select:none}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:disabled{opacity:.38;cursor:not-allowed}
 :focus-visible{outline:2px solid var(--p);outline-offset:2px}
 .sl{position:relative;overflow:hidden}.sl::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .2s var(--e);pointer-events:none}
 .sl:hover::after{opacity:.08}.sl:active::after{opacity:.12}
-.appbar{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--bg);transition:background .25s var(--e),box-shadow .25s}
+.appbar{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--bg);transition:background .25s,box-shadow .25s}
 .appbar.sc{background:var(--s2);box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .brand{display:flex;align-items:center;gap:12px;font:500 22px/28px Roboto}
 .acts{display:flex;gap:4px;align-items:center}
 .ib{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--onv)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
-.hero{padding:24px 0 8px;max-width:720px}
+.hero{padding:24px 0 8px;max-width:760px}
 h1{font:400 36px/44px Roboto;letter-spacing:-.2px}
 .hero p{color:var(--onv);font-size:16px;line-height:24px;margin:8px 0 20px}
 .search{display:flex;align-items:center;gap:16px;height:56px;border-radius:28px;background:var(--s3);padding:0 16px 0 20px;color:var(--onv);transition:box-shadow .2s}
@@ -38,6 +57,9 @@ h1{font:400 36px/44px Roboto;letter-spacing:-.2px}
 .btn{height:40px;padding:0 24px;border-radius:20px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500;color:var(--p);transition:box-shadow .2s}
 .btn .icon{font-size:18px;margin-left:-8px}
 .btn.tonal{background:var(--sc);color:var(--osc)}.btn.filled{background:var(--p);color:var(--op)}.btn.outl{box-shadow:inset 0 0 0 1px var(--ol)}
+.sel{height:40px;border-radius:8px;background:var(--s3);color:var(--on);padding:0 12px;border:0;box-shadow:inset 0 0 0 1px var(--ol);font:400 14px Roboto;outline:0}
+.sel:focus-visible{box-shadow:inset 0 0 0 2px var(--p)}
+.sum{font-size:12px;color:var(--onv)}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
 .chip{height:32px;flex:none;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--ol);color:var(--onv);font-weight:500;transition:.2s var(--e)}
 .chip .icon{font-size:18px;margin-left:-8px}
@@ -47,7 +69,8 @@ h1{font:400 36px/44px Roboto;letter-spacing:-.2px}
 .card:hover{background:var(--s3);box-shadow:0 1px 3px 1px rgba(0,0,0,.25)}
 @keyframes in{from{opacity:0;transform:translateY(12px)}}
 .hd{display:flex;gap:12px;align-items:center}
-.av{width:44px;height:44px;border-radius:12px;background:#fff;color:#284777;display:grid;place-items:center;font:500 18px Roboto;flex:none;position:relative;overflow:hidden}.av img{position:absolute;inset:6px;width:32px;height:32px;object-fit:contain;background:#fff}
+.av{width:44px;height:44px;border-radius:12px;background:#fff;color:#284777;display:grid;place-items:center;font:500 18px Roboto;flex:none;position:relative;overflow:hidden}
+.av img{position:absolute;inset:6px;width:32px;height:32px;object-fit:contain;background:#fff}
 .hd h2{font:500 16px/24px Roboto;letter-spacing:.15px}.hd p{color:var(--onv)}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{height:24px;display:inline-flex;align-items:center;gap:4px;padding:0 8px;border-radius:8px;background:var(--sc);color:var(--osc);font:500 12px Roboto}.tag .icon{font-size:16px}
@@ -58,12 +81,17 @@ h1{font:400 36px/44px Roboto;letter-spacing:-.2px}
 .fld>.icon{width:40px;text-align:center;font-size:20px}
 .fld.off{opacity:.5}.fld.off code{color:var(--onv)}
 .card .btn{margin-top:auto}
+.stat{display:inline-flex;align-items:center;gap:6px;font:500 11px/16px Roboto;margin-top:2px}
+.stat .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.stat.ok{color:var(--ok)}.stat.pend{color:var(--onv)}.stat.pend .dot{animation:pl 1s infinite alternate}
+@keyframes pl{to{opacity:.2}}
 .fab{position:fixed;right:16px;bottom:16px;z-index:30;height:56px;padding:0 20px 0 16px;border-radius:16px;display:flex;align-items:center;gap:12px;background:var(--pc);color:var(--opc);font:500 14px Roboto;box-shadow:0 3px 8px 3px rgba(0,0,0,.3),0 1px 3px rgba(0,0,0,.3)}
 .snack{position:fixed;left:16px;bottom:16px;z-index:60;max-width:calc(100% - 112px);background:var(--inv);color:var(--oninv);padding:14px 16px;border-radius:4px;box-shadow:0 3px 8px rgba(0,0,0,.35);opacity:0;transform:translateY(16px);pointer-events:none;transition:.25s var(--e)}
 .snack.show{opacity:1;transform:none}
 dialog{border:0;padding:0;margin:auto;width:calc(100% - 32px);max-width:560px;max-height:85vh;background:var(--s3);color:var(--on);border-radius:28px;overflow:hidden}
 dialog[open]{display:flex;flex-direction:column;animation:in .25s var(--e)}
 dialog::backdrop{background:rgba(0,0,0,.4)}
+dialog.full{max-width:none;width:100vw;max-height:none;height:100vh;height:100dvh;margin:0;border-radius:0;background:var(--bg)}
 .dh{padding:24px 24px 0}.dh h3{font:400 24px/32px Roboto}.dh p{color:var(--onv);margin-top:8px}
 .db{padding:16px 24px;overflow-y:auto}
 .da{padding:8px 24px 24px;display:flex;justify-content:flex-end;gap:8px}
@@ -73,22 +101,44 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
 .steps{list-style:none;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:16px;padding-top:20px}
 .steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;font-size:14px;line-height:22px}
 .steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--pc);color:var(--opc);display:grid;place-items:center;font-weight:500}
-.steps code{font:13px 'Roboto Mono',monospace;color:var(--p);word-break:break-all}
 .seg{display:inline-flex;border-radius:20px;box-shadow:inset 0 0 0 1px var(--ol);overflow:hidden}
 .seg button{height:40px;padding:0 20px;display:flex;gap:8px;align-items:center;font-weight:500;color:var(--onv);border-left:1px solid var(--ol)}
-.seg button:first-child{border:0}.seg button.on{background:var(--sc);color:var(--osc)}.seg .icon{font-size:18px}.seg button:disabled{opacity:.4}
+.seg button:first-child{border:0}.seg button.on{background:var(--sc);color:var(--osc)}.seg .icon{font-size:18px}
 #qrC{display:block;margin:16px auto;background:#fff;padding:12px;border-radius:16px}
 #qrV{display:block;text-align:center;font:13px 'Roboto Mono',monospace;color:var(--p);word-break:break-all}
 .menuwrap{position:relative}
 .menu{position:absolute;right:0;top:52px;min-width:180px;background:var(--s3);border-radius:4px;padding:8px 0;box-shadow:0 3px 10px 2px rgba(0,0,0,.35);z-index:40}
 .menu button{width:100%;height:48px;padding:0 16px;display:flex;align-items:center;gap:12px;text-align:left}.menu .icon{width:24px;font-size:20px}
-.pick{display:flex;align-items:center;gap:8px;justify-content:space-between;padding:12px 16px;border-radius:12px;background:var(--s2);margin-bottom:8px}
-.pick b{font-weight:500}.pick code{display:block;font:13px 'Roboto Mono',monospace;color:var(--p);word-break:break-all}
 .muted{color:var(--onv)}
 footer{text-align:center;color:var(--onv);font-size:12px;padding:8px 0 32px}footer a{color:var(--p)}
-.stat{display:inline-flex;align-items:center;gap:6px;font:500 11px/16px Roboto;margin-top:2px}.stat .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}.stat.ok{color:var(--ok)}.stat.warn{color:var(--warn)}.stat.down{color:var(--err)}.stat.pend,.stat.na{color:var(--onv)}.stat.pend .dot{animation:pl 1s infinite alternate}@keyframes pl{to{opacity:.2}}
-#sum{font-size:12px;color:var(--onv)}
-@media(max-width:599px){h1{font-size:28px;line-height:36px}.fab span:last-child{display:none}.fab{padding:0;width:56px;justify-content:center}}
+/* wizard */
+.wtop{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--s2)}
+.wtop h3{font:400 22px/28px Roboto;flex:1}
+.prog{height:4px;background:var(--s4)}.prog i{display:block;height:100%;background:var(--p);transition:width .35s var(--e)}
+.wbody{flex:1;overflow-y:auto;padding:24px 16px}
+.wcol{max-width:920px;margin:0 auto}
+.wcol h2{font:400 28px/36px Roboto}
+.wcol>p{color:var(--onv);margin:8px 0 24px;font-size:16px;line-height:24px}
+.opts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;padding:16px;border-radius:16px;background:var(--s2);box-shadow:inset 0 0 0 1px var(--olv);width:100%;transition:.2s var(--e)}
+.opt:hover{background:var(--s3)}
+.opt.on{box-shadow:inset 0 0 0 2px var(--p);background:var(--sc);color:var(--osc)}
+.opt .icon{font-size:26px;color:var(--p);flex:none}
+.opt.on .icon{color:var(--osc)}
+.opt b{display:block;font-weight:500;font-size:15px;margin-bottom:4px}
+.opt span.d{font-size:13px;line-height:18px;color:var(--onv)}
+.opt.on span.d{color:var(--osc)}
+.wfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--olv);background:var(--s2)}
+.rcard{background:var(--s2);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.rcard h4{font:500 18px/24px Roboto}
+.why{display:flex;flex-wrap:wrap;gap:6px}
+.why .tag{background:var(--pc);color:var(--opc)}
+.warnt{font-size:12px;color:var(--warn)}
+.rgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.rrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rrow .btn{width:100%;padding:0 12px;font-size:13px}
+.empty{padding:40px 16px;text-align:center;color:var(--onv)}
+@media(max-width:599px){h1{font-size:28px;line-height:36px}.fab span:last-child{display:none}.fab{padding:0;width:56px;justify-content:center}.rrow{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -104,124 +154,250 @@ footer{text-align:center;color:var(--onv);font-size:12px;padding:8px 0 32px}foot
   <section class="hero">
     <h1 id="h1"></h1><p id="sub"></p>
     <label class="search"><span class="icon">search</span><input id="q" type="search" autocomplete="off" aria-label="Search"><small id="count"></small></label>
-    <div class="row"><button class="btn tonal sl" data-open="wizM"><span class="icon">auto_awesome</span><span data-t="wiz"></span></button><button class="btn outl sl" id="testBtn"><span class="icon">network_check</span><span data-t="test"></span></button><span id="sum"></span></div>
+    <div class="row">
+      <button class="btn tonal sl" data-open="wizM"><span class="icon">auto_awesome</span><span data-t="wiz"></span></button>
+      <button class="btn outl sl" id="testBtn"><span class="icon">network_check</span><span data-t="test"></span></button>
+      <select class="sel" id="sort" aria-label="Sort"></select>
+      <span class="sum" id="sum"></span>
+    </div>
   </section>
   <div id="chips" class="chips"></div>
   <div id="grid" class="grid"></div>
-  <p id="none" class="muted" hidden style="text-align:center;padding:48px 0"></p>
-  <footer>MeshClean · MIT · <a href="https://github.com/meshclean" target="_blank" rel="noopener">GitHub</a><br><span data-t="foot"></span></footer>
+  <p id="none" class="empty" hidden></p>
+  <footer>MeshClean · GPL-3.0 · <a href="https://github.com/meshclean" target="_blank" rel="noopener">GitHub</a><br><span data-t="foot"></span><br><span data-t="cacheInfo"></span></footer>
 </main>
 <button class="fab sl" data-open="howM"><span class="icon">menu_book</span><span data-t="how"></span></button>
 
 <dialog id="qrM"><div class="dh"><h3 id="qrT"></h3></div><div class="db" style="text-align:center">
-  <div class="seg"><button id="qDot"><span class="icon">check</span>DoT</button><button id="qDoh"><span class="icon">check</span>DoH</button></div>
+  <div class="seg"><button id="qDot">DoT</button><button id="qDoh">DoH</button></div>
   <canvas id="qrC"></canvas><code id="qrV"></code><p class="muted" data-t="qrNote" style="margin-top:12px;font-size:12px"></p></div>
   <div class="da"><button class="btn sl" data-close data-t="close"></button></div></dialog>
+
 <dialog id="howM"><div class="dh"><h3 data-t="how"></h3></div><div id="osTabs" class="tabs" style="margin-top:12px"></div>
   <div class="db"><ol id="osBody" class="steps" style="padding-top:4px"></ol></div>
   <div class="da"><button class="btn sl" data-close data-t="close"></button></div></dialog>
-<dialog id="wizM"><div class="dh"><h3 data-t="wiz"></h3><p data-t="wizD"></p></div>
-  <div class="db"><div id="wizOpts" class="chips" style="flex-wrap:wrap;padding-top:0"></div><div id="wizRes"></div></div>
-  <div class="da"><button class="btn sl" data-close data-t="close"></button></div></dialog>
+
+<dialog id="wizM" class="full" aria-labelledby="wizTitle">
+  <div class="wtop"><button class="ib sl" data-close aria-label="close"><span class="icon">close</span></button><h3 id="wizTitle" data-t="wiz"></h3></div>
+  <div class="prog"><i id="wprog" style="width:0"></i></div>
+  <div class="wbody" id="wbody"></div>
+  <div class="wfoot" id="wfoot"></div>
+</dialog>
+
 <div class="snack" id="toast" role="status"></div>
 <script>
-// [ad, etiketler, DoT, DoH, IP]
-const D=[
-["Control D · P2 Ads & Trackers","ads malware","p2.freedns.controld.com","https://freedns.controld.com/p2","76.76.2.2","controld.com"],
-["Control D · P1 Malware","malware","p1.freedns.controld.com","https://freedns.controld.com/p1","76.76.2.1","controld.com"],
-["Control D · Family Friendly","family ads malware","family.freedns.controld.com","https://freedns.controld.com/family","76.76.2.4","controld.com"],
-["Control D · Hagezi Pro","ads malware","x-hagezi-pro.freedns.controld.com","https://freedns.controld.com/x-hagezi-pro","76.76.2.41","controld.com"],
-["Control D · Unfiltered","speed privacy","p0.freedns.controld.com","https://freedns.controld.com/p0","76.76.2.0","controld.com"],
+// [name, tags, DoT host, DoH URL, IPv4, domain for logo]
+const RAW=[
+["Control D · P0 Unfiltered","speed privacy","p0.freedns.controld.com","https://freedns.controld.com/p0","76.76.2.0","controld.com"],
+["Control D · P1 Malware","malware privacy","p1.freedns.controld.com","https://freedns.controld.com/p1","76.76.2.1","controld.com"],
+["Control D · P2 Ads & Trackers","ads malware privacy","p2.freedns.controld.com","https://freedns.controld.com/p2","76.76.2.2","controld.com"],
+["Control D · Family","family ads malware privacy","family.freedns.controld.com","https://freedns.controld.com/family","76.76.2.4","controld.com"],
 ["Control D · Uncensored","privacy","uncensored.freedns.controld.com","https://freedns.controld.com/uncensored","76.76.2.5","controld.com"],
-["AdGuard DNS · Default","ads malware","dns.adguard-dns.com","https://dns.adguard-dns.com/dns-query","94.140.14.14","adguard.com"],
-["AdGuard DNS · Family","ads family malware","family.adguard-dns.com","https://family.adguard-dns.com/dns-query","94.140.14.15","adguard.com"],
-["AdGuard DNS · Unfiltered","privacy speed","unfiltered.adguard-dns.com","https://unfiltered.adguard-dns.com/dns-query","94.140.14.140","adguard.com"],
+["Control D · Hagezi Light","ads privacy","x-hagezi-light.freedns.controld.com","https://freedns.controld.com/x-hagezi-light","76.76.2.37","controld.com"],
+["Control D · Hagezi Pro","ads malware privacy","x-hagezi-pro.freedns.controld.com","https://freedns.controld.com/x-hagezi-pro","76.76.2.41","controld.com"],
+["Control D · Hagezi Ultimate","ads malware privacy","x-hagezi-ultimate.freedns.controld.com","https://freedns.controld.com/x-hagezi-ultimate","76.76.2.45","controld.com"],
+["Control D · OISD Full","ads privacy","x-oisd.freedns.controld.com","https://freedns.controld.com/x-oisd","76.76.2.32","controld.com"],
+["Control D · OISD Basic","ads privacy","x-oisd-basic.freedns.controld.com","https://freedns.controld.com/x-oisd-basic","76.76.2.33","controld.com"],
+["Control D · StevenBlack","ads malware privacy","x-stevenblack.freedns.controld.com","https://freedns.controld.com/x-stevenblack","76.76.2.35","controld.com"],
+["Control D · 1Hosts Lite","ads privacy","x-1hosts-lite.freedns.controld.com","https://freedns.controld.com/x-1hosts-lite","76.76.2.38","controld.com"],
+["Control D · 1Hosts Pro","ads malware privacy","x-1hosts-pro.freedns.controld.com","https://freedns.controld.com/x-1hosts-pro","76.76.2.39","controld.com"],
+["Control D · AdGuard Filter","ads privacy","x-adguard.freedns.controld.com","https://freedns.controld.com/x-adguard","76.76.2.44","controld.com"],
+["Control D · GoodbyeAds","ads privacy","x-goodbyeads.freedns.controld.com","https://freedns.controld.com/x-goodbyeads","76.76.2.43","controld.com"],
+["AdGuard DNS · Default","ads malware privacy","dns.adguard-dns.com","https://dns.adguard-dns.com/dns-query","94.140.14.14","adguard.com"],
+["AdGuard DNS · Family","family ads malware privacy","family.adguard-dns.com","https://family.adguard-dns.com/dns-query","94.140.14.15","adguard.com"],
+["AdGuard DNS · Unfiltered","speed privacy","unfiltered.adguard-dns.com","https://unfiltered.adguard-dns.com/dns-query","94.140.14.140","adguard.com"],
 ["Cloudflare · 1.1.1.1","speed privacy","one.one.one.one","https://cloudflare-dns.com/dns-query","1.1.1.1","cloudflare.com"],
-["Cloudflare · 1.1.1.2 Malware","malware speed","security.cloudflare-dns.com","https://security.cloudflare-dns.com/dns-query","1.1.1.2","cloudflare.com"],
-["Cloudflare · 1.1.1.3 Family","family malware","family.cloudflare-dns.com","https://family.cloudflare-dns.com/dns-query","1.1.1.3","cloudflare.com"],
+["Cloudflare · 1.1.1.2 Malware","malware privacy","security.cloudflare-dns.com","https://security.cloudflare-dns.com/dns-query","1.1.1.2","cloudflare.com"],
+["Cloudflare · 1.1.1.3 Family","family malware privacy","family.cloudflare-dns.com","https://family.cloudflare-dns.com/dns-query","1.1.1.3","cloudflare.com"],
 ["Quad9 · Secured","malware privacy","dns.quad9.net","https://dns.quad9.net/dns-query","9.9.9.9","quad9.net"],
-["Quad9 · Unsecured","privacy speed","dns10.quad9.net","https://dns10.quad9.net/dns-query","9.9.9.10","quad9.net"],
-["CleanBrowsing · Family","family malware","family-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/family-filter/","185.228.168.168","cleanbrowsing.org"],
-["CleanBrowsing · Adult","family malware","adult-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/adult-filter/","185.228.168.10","cleanbrowsing.org"],
-["CleanBrowsing · Security","malware","security-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/security-filter/","185.228.168.9","cleanbrowsing.org"],
-["DNS.SB","privacy speed","dot.sb","https://doh.dns.sb/dns-query","185.222.222.222","dns.sb"],
-["RethinkDNS · 1Hosts Lite","ads privacy","1-aacaeaa.max.rethinkdns.com","https://max.rethinkdns.com/1:AAQCAA==","","rethinkdns.com"],
-["OpenDNS · Standard","speed malware","","https://doh.opendns.com/dns-query","208.67.222.222","opendns.com"],
-["OpenDNS · FamilyShield","family","","https://doh.familyshield.opendns.com/dns-query","208.67.222.123","opendns.com"],
-["Comodo Secure DNS (şifresiz / plain)","malware","","","8.26.56.26","comodo.com"],
-["NextDNS · Public","privacy speed","dns.nextdns.io","https://dns.nextdns.io","","nextdns.io"],
-["Google Public DNS","speed","dns.google","https://dns.google/dns-query","8.8.8.8","google.com"],
-["DNS4EU · Protective","malware privacy","protective.joindns4.eu","https://protective.joindns4.eu/dns-query","86.54.11.1","joindns4.eu"],
-["DNS4EU · Child Protection","family malware","child.joindns4.eu","https://child.joindns4.eu/dns-query","86.54.11.12","joindns4.eu"],
-["DNS4EU · Child + No Ads","family ads malware","child-noads.joindns4.eu","https://child-noads.joindns4.eu/dns-query","86.54.11.11","joindns4.eu"],
-["DNS4EU · No Ads","ads malware","noads.joindns4.eu","https://noads.joindns4.eu/dns-query","86.54.11.13","joindns4.eu"],
-["DNS4EU · Unfiltered","privacy speed","unfiltered.joindns4.eu","https://unfiltered.joindns4.eu/dns-query","86.54.11.100","joindns4.eu"],
-["LibreDNS","privacy","dot.libredns.gr","https://doh.libredns.gr/dns-query","116.202.176.26","libredns.gr"],
-["LibreDNS · NoAds","ads privacy","noads.libredns.gr","https://doh.libredns.gr/noads","116.202.176.26","libredns.gr"],
+["Quad9 · Unsecured","speed privacy","dns10.quad9.net","https://dns10.quad9.net/dns-query","9.9.9.10","quad9.net"],
+["CleanBrowsing · Family","family malware privacy","family-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/family-filter/","185.228.168.168","cleanbrowsing.org"],
+["CleanBrowsing · Adult","family malware privacy","adult-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/adult-filter/","185.228.168.10","cleanbrowsing.org"],
+["CleanBrowsing · Security","malware privacy","security-filter-dns.cleanbrowsing.org","https://doh.cleanbrowsing.org/doh/security-filter/","185.228.168.9","cleanbrowsing.org"],
+["DNS.SB","speed privacy","dot.sb","https://doh.dns.sb/dns-query","185.222.222.222","dns.sb"],
 ["Digitale Gesellschaft","privacy","dns.digitale-gesellschaft.ch","https://dns.digitale-gesellschaft.ch/dns-query","","digitale-gesellschaft.ch"],
 ["Applied Privacy","privacy","dot1.applied-privacy.net","https://doh.applied-privacy.net/query","146.255.56.98","applied-privacy.net"],
-["dnsforge.de","ads malware privacy","dnsforge.de","https://dnsforge.de/dns-query","176.9.93.198","dnsforge.de"]
-].map(r=>({n:r[0],t:r[1].split(" "),dot:r[2],doh:r[3],ip:r[4],dom:r[5]}));
+["LibreDNS","privacy","dot.libredns.gr","https://doh.libredns.gr/dns-query","116.202.176.26","libredns.gr"],
+["LibreDNS · NoAds","ads privacy","noads.libredns.gr","https://doh.libredns.gr/noads","116.202.176.26","libredns.gr"],
+["dnsforge.de","ads malware privacy","dnsforge.de","https://dnsforge.de/dns-query","176.9.93.198","dnsforge.de"],
+["DNS4EU · Protective","malware privacy","protective.joindns4.eu","https://protective.joindns4.eu/dns-query","86.54.11.1","joindns4.eu"],
+["DNS4EU · Child","family malware privacy","child.joindns4.eu","https://child.joindns4.eu/dns-query","86.54.11.12","joindns4.eu"],
+["DNS4EU · Child + No Ads","family ads malware privacy","child-noads.joindns4.eu","https://child-noads.joindns4.eu/dns-query","86.54.11.11","joindns4.eu"],
+["DNS4EU · No Ads","ads malware privacy","noads.joindns4.eu","https://noads.joindns4.eu/dns-query","86.54.11.13","joindns4.eu"],
+["DNS4EU · Unfiltered","speed privacy","unfiltered.joindns4.eu","https://unfiltered.joindns4.eu/dns-query","86.54.11.100","joindns4.eu"],
+["Google Public DNS","speed privacy","dns.google","https://dns.google/dns-query","8.8.8.8","google.com"],
+["OpenDNS · Standard","malware speed","","https://doh.opendns.com/dns-query","208.67.222.222","opendns.com"],
+["OpenDNS · FamilyShield","family","","https://doh.familyshield.opendns.com/dns-query","208.67.222.123","opendns.com"],
+["Hostux","speed privacy","","https://dns.hostux.net/dns-query","","hostux.net"],
+["Hostux · Ads","ads privacy","","https://dns.hostux.net/ads","","hostux.net"],
+["DeepDNS","speed privacy","","https://public.deepdns.net/dns-query","","deepdns.net"],
+["DeepDNS · Ads","ads privacy","","https://public.deepdns.net/dns-query-ts","","deepdns.net"],
+["AhaDNS · 1Hosts Pro","ads malware privacy","","https://blitz.ahadns.com/1:5","","ahadns.com"],
+["RethinkDNS · 1Hosts Lite","ads privacy","1-aacaeaa.max.rethinkdns.com","https://max.rethinkdns.com/1:AAQCAA==","","rethinkdns.com"],
+["RethinkDNS · 1Hosts Pro","ads malware privacy","1-aababaa.max.rethinkdns.com","https://max.rethinkdns.com/1:AAIAgA==","","rethinkdns.com"],
+["RethinkDNS · 1Hosts Xtra","ads malware family privacy","1-eaabaaa.max.rethinkdns.com","https://max.rethinkdns.com/1:IAAQAA==","","rethinkdns.com"],
+["Public-RDNS · Lite","ads malware privacy","lite.public-rdns.com","https://lite.public-rdns.com/dns-query","","public-rdns.com"]
+];
+const D=RAW.map(r=>({n:r[0],t:r[1].split(" "),dot:r[2],doh:r[3],ip:r[4],dom:r[5]}));
 const TAGS=["ads","family","privacy","speed","malware"];
+const ICON={ads:"block",family:"family_restroom",privacy:"visibility_off",speed:"bolt",malware:"bug_report"};
+const GI={ads:"block",malware:"bug_report",family:"family_restroom",privacy:"lock",speed:"bolt"};
+const OSI={android:"phone_android",ios:"phone_iphone",windows:"desktop_windows",macos:"laptop_mac",linux:"terminal",router:"router"};
+const OS=["android","ios","windows","macos","linux","router"];
+const OSN={android:"Android",ios:"iOS",windows:"Windows",macos:"macOS",linux:"Linux",router:"Router"};
 
 const T={
-tr:{sub:"Ücretsiz, sınırsız ve güvenilir DNS sağlayıcıları — tek tıkla kur.",search:"Sağlayıcı veya özellik ara…",all:"Tümü",ads:"Reklam Engelleyici",family:"Aile Koruması",privacy:"Sadece Gizlilik",speed:"Hız Odaklı",malware:"Zararlı Yazılım Koruması",how:"Nasıl Kurulur?",wiz:"Profil Sihirbazı",wizD:"İhtiyaçlarını seç, sana en uygun ücretsiz DNS'i önerelim.",copyDot:"DoT Adresini Kopyala",copyDoh:"DoH URL'sini Kopyala",qr:"QR Kod Göster",copied:"Kopyalandı ✓",none:"Sonuç bulunamadı.",close:"Kapat",qrNote:"Android'de QR'ı okutup metni kopyalayın, sonra Ayarlar › Özel DNS alanına yapıştırın.",count:"sağlayıcı",pick:"Önerilen",foot:"Adresleri kullanmadan önce sağlayıcının resmî sayfasından doğrulayın.",noDot:"DoT yok",noDoh:"DoH yok",select:"Bir veya daha fazla özellik seç.",
-g:{android:"Ayarlar › Ağ ve İnternet › Gelişmiş › Özel DNS'e gir (menü adı üreticiye göre değişir)|'Özel DNS sağlayıcı ana makine adı'nı seç|Karttaki DoT adresini yapıştır ve Kaydet'e dokun",
-ios:"Sağlayıcının sitesinden DoH/DoT .mobileconfig profilini indir (Control D, AdGuard, NextDNS vb. sunar)|Ayarlar › Genel › VPN ve Aygıt Yönetimi'nden profili yükle|Ayarlar › Genel › VPN ve Aygıt Yönetimi › DNS'ten sağlayıcıyı seç",
-windows:"Ayarlar › Ağ ve İnternet › Ethernet/Wi‑Fi › DNS sunucu ataması › Düzenle › Manuel|IPv4'ü aç, sağlayıcının IP adresini yaz, 'DNS over HTTPS'i aç|Özel şablon gerekirse yönetici komut satırında: netsh dns add encryption server=<IP> dohtemplate=<DoH-URL> autoupgrade=yes",
-macos:"Sistem Ayarları › Ağ › bağlantın › Ayrıntılar › DNS bölümünden IP adreslerini ekle|Şifreli DNS için sağlayıcının .mobileconfig profilini yükle (Sistem Ayarları › Gizlilik ve Güvenlik › Profiller)",
-linux:"/etc/systemd/resolved.conf dosyasına yaz: DNS=<IP>#<DoT-adresi> ve DNSOverTLS=yes|sudo systemctl restart systemd-resolved|resolvectl status ile doğrula",
-router:"Yönlendirici arayüzüne gir (ör. 192.168.1.1)|WAN/DHCP DNS alanına IP adreslerini yaz|Şifreli DNS için OpenWrt (https-dns-proxy / stubby) veya AdGuard Home kullan|Cihazların bağlantısını yenile"}},
-en:{sub:"Free, unlimited and trusted DNS providers — set up in one tap.",search:"Search provider or feature…",all:"All",ads:"Ad Blocker",family:"Family Protection",privacy:"Privacy Only",speed:"Speed Focused",malware:"Malware Protection",how:"How to set up?",wiz:"Profile Wizard",wizD:"Pick what you need and we'll suggest the best free DNS.",copyDot:"Copy DoT Address",copyDoh:"Copy DoH URL",qr:"Show QR Code",copied:"Copied ✓",none:"No results found.",close:"Close",qrNote:"On Android, scan the QR, copy the text, then paste it into Settings › Private DNS.",count:"providers",pick:"Best match",foot:"Verify addresses on the provider's official page before use.",noDot:"No DoT",noDoh:"No DoH",select:"Select one or more features.",
-g:{android:"Settings › Network & Internet › Advanced › Private DNS (menu name varies by vendor)|Choose 'Private DNS provider hostname'|Paste the DoT address from the card and tap Save",
-ios:"Download a DoH/DoT .mobileconfig profile from the provider (Control D, AdGuard, NextDNS etc. offer them)|Install it via Settings › General › VPN & Device Management|Then pick it in Settings › General › VPN & Device Management › DNS",
-windows:"Settings › Network & Internet › Ethernet/Wi‑Fi › DNS server assignment › Edit › Manual|Enable IPv4, enter the provider IP and turn on 'DNS over HTTPS'|For a custom template, run as admin: netsh dns add encryption server=<IP> dohtemplate=<DoH-URL> autoupgrade=yes",
-macos:"System Settings › Network › your connection › Details › DNS: add the IP addresses|For encrypted DNS install the provider's .mobileconfig (System Settings › Privacy & Security › Profiles)",
-linux:"In /etc/systemd/resolved.conf set: DNS=<IP>#<DoT-host> and DNSOverTLS=yes|sudo systemctl restart systemd-resolved|Verify with resolvectl status",
-router:"Open your router admin page (e.g. 192.168.1.1)|Enter the IPs in the WAN/DHCP DNS fields|For encrypted DNS use OpenWrt (https-dns-proxy / stubby) or AdGuard Home|Reconnect your devices"}},
-de:{sub:"Kostenlose, unbegrenzte und vertrauenswürdige DNS-Anbieter – mit einem Klick einrichten.",search:"Anbieter oder Funktion suchen…",all:"Alle",ads:"Werbeblocker",family:"Jugendschutz",privacy:"Nur Datenschutz",speed:"Geschwindigkeit",malware:"Malware-Schutz",how:"Wie einrichten?",wiz:"Profil-Assistent",wizD:"Wähle deine Anforderungen – wir empfehlen das beste kostenlose DNS.",copyDot:"DoT-Adresse kopieren",copyDoh:"DoH-URL kopieren",qr:"QR-Code anzeigen",copied:"Kopiert ✓",none:"Keine Ergebnisse.",close:"Schließen",qrNote:"Unter Android QR scannen, Text kopieren und in Einstellungen › Privates DNS einfügen.",count:"Anbieter",pick:"Beste Wahl",foot:"Adressen vor der Nutzung auf der offiziellen Seite des Anbieters prüfen.",noDot:"Kein DoT",noDoh:"Kein DoH",select:"Wähle mindestens eine Funktion.",
-g:{android:"Einstellungen › Netzwerk & Internet › Erweitert › Privates DNS (Menüname je nach Hersteller)|'Hostname des privaten DNS-Anbieters' wählen|DoT-Adresse von der Karte einfügen und Speichern",
-ios:"DoH/DoT-.mobileconfig-Profil beim Anbieter laden (Control D, AdGuard, NextDNS usw.)|Unter Einstellungen › Allgemein › VPN & Geräteverwaltung installieren|Dort unter DNS den Anbieter auswählen",
-windows:"Einstellungen › Netzwerk & Internet › Ethernet/WLAN › DNS-Serverzuweisung › Bearbeiten › Manuell|IPv4 aktivieren, IP des Anbieters eintragen, 'DNS over HTTPS' einschalten|Eigene Vorlage als Admin: netsh dns add encryption server=<IP> dohtemplate=<DoH-URL> autoupgrade=yes",
-macos:"Systemeinstellungen › Netzwerk › Verbindung › Details › DNS: IP-Adressen hinzufügen|Für verschlüsseltes DNS die .mobileconfig des Anbieters installieren (Datenschutz & Sicherheit › Profile)",
-linux:"In /etc/systemd/resolved.conf eintragen: DNS=<IP>#<DoT-Host> und DNSOverTLS=yes|sudo systemctl restart systemd-resolved|Mit resolvectl status prüfen",
-router:"Router-Oberfläche öffnen (z. B. 192.168.1.1)|IPs in die WAN/DHCP-DNS-Felder eintragen|Für verschlüsseltes DNS OpenWrt (https-dns-proxy / stubby) oder AdGuard Home nutzen|Geräte neu verbinden"}}
+tr:{sub:"Ücretsiz, sınırsız ve canlı doğrulanmış DNS sağlayıcıları. Çalışmayanlar otomatik gizlenir.",search:"Sağlayıcı, adres veya özellik ara…",all:"Tümü",ads:"Reklam Engelleme",family:"Aile Koruması",privacy:"Gizlilik",speed:"Hız Odaklı",malware:"Zararlı Yazılım Koruması",how:"Nasıl Kurulur?",wiz:"Profil Sihirbazı",test:"Yeniden test et",testing:"test ediliyor",sum:"çalışıyor",sSpeed:"En hızlı",sName:"Ada göre",sProv:"Sağlayıcıya göre",copyDot:"DoT adresini kopyala",copyDoh:"DoH URL'sini kopyala",qr:"QR kodu göster",copied:"Kopyalandı",none:"Bu filtrede çalışan sağlayıcı yok.",close:"Kapat",qrNote:"Android'de QR'ı okutun ya da metni kopyalayıp Ayarlar › Özel DNS alanına yapıştırın.",count:"sağlayıcı",noDot:"DoT yok",noDoh:"DoH yok",foot:"Her adres tarayıcınızdan gerçek bir DNS sorgusuyla test edilir; geçmeyen sağlayıcı listeden gizlenir.",cacheInfo:"Sonuçlar 15 dakika önbelleğe alınır.",
+wD:"Birkaç adımda ihtiyacına uygun, şu an çalıştığı doğrulanmış sağlayıcıyı bulalım.",wNext:"İleri",wBack:"Geri",wRestart:"Baştan başla",wDone:"Sonuçları gör",
+w1:"Ne istiyorsun?",w1d:"Birden fazla seçebilirsin. Seçtiğin her koruma, sağlayıcıda mutlaka bulunur.",
+w2:"Bağlantı türü",w2d:"Tarayıcılar ve uygulamalar genelde DoH, Android ve yönlendiriciler DoT kullanır.",
+w3:"Cihazın",w3d:"Kurulum adımları seçtiğin cihaza göre gösterilir.",
+w4:"Sana uygun sağlayıcılar",w4d:"Yalnızca bu oturumda çalıştığı doğrulanmış sağlayıcılar gösterilir.",
+wNone:"Bu kriterlere uyan çalışan bir sağlayıcı bulunamadı. Bağlantı türünü 'Farketmez' yapmayı veya sayfayı yeniden test etmeyi dene.",
+wWhy:"Eşleşen korumalar",wExtra:"Ek olarak filtreler",wSteps:"Kurulum adımları",
+gA:"Reklam ve izleyicileri engelle",gM:"Zararlı yazılım ve oltalamayı engelle",gF:"Yetişkin içeriği engelle (aile)",gP:"Gizlilik: sorgular şifreli, filtre yok",gS:"En hızlı, filtre istemiyorum",
+pAny:"Farketmez",pAnyD:"Çalışan her seçenek gösterilir.",pDoh:"DoH",pDohD:"Tarayıcılar ve masaüstü uygulamalar için.",pDot:"DoT",pDotD:"Android Özel DNS ve yönlendiriciler için.",
+G:{android:["Ayarlar › Ağ ve internet › Gelişmiş › Özel DNS bölümüne gir (menü adı üreticiye göre değişir)","'Özel DNS sağlayıcı ana makine adı' seçeneğini seç","Karttaki DoT adresini yapıştır ve Kaydet'e dokun"],
+ios:["Sağlayıcının sitesinden DoH/DoT .mobileconfig profilini indir (Control D, AdGuard vb. sunar)","Ayarlar › Genel › VPN ve Aygıt Yönetimi bölümünden profili yükle","Ayarlar › Genel › VPN ve Aygıt Yönetimi bölümünden profilin etkin olduğunu doğrula"],
+windows:["Ayarlar › Ağ ve internet › Ethernet veya Wi-Fi › Donanım özellikleri › DNS sunucu ataması › Düzenle","Manuel seç, IPv4'ü aç ve sağlayıcının IP adresini yaz","Şifreli DNS (DNS over HTTPS) seçeneğini aç ve DoH adresini şablon olarak gir"],
+macos:["Sistem Ayarları › Ağ › bağlantın › Ayrıntılar › DNS bölümüne git","IP adreslerini ekle","Şifreli DNS için sağlayıcının .mobileconfig profilini Sistem Ayarları › Gizlilik ve Güvenlik › Profiller bölümünden yükle"],
+linux:["/etc/systemd/resolved.conf dosyasına DNS=<IP>#<DoT-adresi> ve DNSOverTLS=yes satırlarını yaz","sudo systemctl restart systemd-resolved komutunu çalıştır","resolvectl status ile doğrula"],
+router:["Yönlendirici yönetim paneline gir (örn. 192.168.1.1)","WAN veya DHCP DNS alanlarına IP adreslerini yaz","Şifreli DNS için OpenWrt (https-dns-proxy / stubby) ya da AdGuard Home kullan","Cihazların bağlantısını yenile"]},
+ui:{}},
+en:{sub:"Free, unlimited and live-verified DNS providers. Anything that doesn't work is hidden automatically.",search:"Search provider, address or feature…",all:"All",ads:"Ad Blocking",family:"Family Protection",privacy:"Privacy",speed:"Speed Focused",malware:"Malware Protection",how:"How to set up?",wiz:"Profile Wizard",test:"Re-test",testing:"testing",sum:"working",sSpeed:"Fastest",sName:"By name",sProv:"By provider",copyDot:"Copy DoT address",copyDoh:"Copy DoH URL",qr:"Show QR code",copied:"Copied",none:"No working provider matches this filter.",close:"Close",qrNote:"On Android, scan the QR code or copy the text and paste it into Settings › Private DNS.",count:"providers",noDot:"No DoT",noDoh:"No DoH",foot:"Every address is tested with a real DNS query from your browser; providers that fail are hidden.",cacheInfo:"Results are cached for 15 minutes.",
+wD:"A few steps to find a provider that suits you and is working right now.",wNext:"Next",wBack:"Back",wRestart:"Start over",wDone:"See results",
+w1:"What do you want?",w1d:"You can pick several. Every protection you pick is guaranteed in the provider.",
+w2:"Connection type",w2d:"Browsers and desktop apps usually use DoH; Android and routers usually use DoT.",
+w3:"Your device",w3d:"Setup steps are shown for the device you pick.",
+w4:"Providers for you",w4d:"Only providers verified as working in this session are shown.",
+wNone:"No working provider matches these criteria. Try 'Any' for connection type or re-test the page.",
+wWhy:"Matched protections",wExtra:"Also filters",wSteps:"Setup steps",
+gA:"Block ads and trackers",gM:"Block malware and phishing",gF:"Block adult content (family)",gP:"Privacy: encrypted queries, no filtering",gS:"Fastest, no filtering",
+pAny:"Any",pAnyD:"Every working option is shown.",pDoh:"DoH",pDohD:"For browsers and desktop apps.",pDot:"DoT",pDotD:"For Android Private DNS and routers.",
+G:{android:["Go to Settings › Network & internet › Advanced › Private DNS (name varies by vendor)","Choose 'Private DNS provider hostname'","Paste the DoT address from the card and tap Save"],
+ios:["Download the DoH/DoT .mobileconfig profile from the provider's site (Control D, AdGuard etc. offer it)","Install it under Settings › General › VPN & Device Management","Confirm the profile is active in the same section"],
+windows:["Settings › Network & Internet › Ethernet or Wi-Fi › Hardware properties › DNS server assignment › Edit","Choose Manual, enable IPv4 and enter the provider's IP","Enable encrypted DNS (DNS over HTTPS) and enter the DoH URL as template"],
+macos:["System Settings › Network › your connection › Details › DNS","Add the IP addresses","For encrypted DNS install the provider's .mobileconfig under System Settings › Privacy & Security › Profiles"],
+linux:["In /etc/systemd/resolved.conf set DNS=<IP>#<DoT-host> and DNSOverTLS=yes","Run sudo systemctl restart systemd-resolved","Verify with resolvectl status"],
+router:["Open the router admin page (e.g. 192.168.1.1)","Enter the IP addresses in the WAN or DHCP DNS fields","For encrypted DNS use OpenWrt (https-dns-proxy / stubby) or AdGuard Home","Reconnect your devices"]},
+ui:{}},
+de:{sub:"Kostenlose, unbegrenzte und live geprüfte DNS-Anbieter. Nicht funktionierende werden automatisch ausgeblendet.",search:"Anbieter, Adresse oder Funktion suchen…",all:"Alle",ads:"Werbeblockierung",family:"Jugendschutz",privacy:"Datenschutz",speed:"Geschwindigkeit",malware:"Malware-Schutz",how:"Wie einrichten?",wiz:"Profil-Assistent",test:"Erneut testen",testing:"wird getestet",sum:"funktionieren",sSpeed:"Schnellste",sName:"Nach Name",sProv:"Nach Anbieter",copyDot:"DoT-Adresse kopieren",copyDoh:"DoH-URL kopieren",qr:"QR-Code anzeigen",copied:"Kopiert",none:"Kein funktionierender Anbieter für diesen Filter.",close:"Schließen",qrNote:"Unter Android QR-Code scannen oder den Text kopieren und in Einstellungen › Privates DNS einfügen.",count:"Anbieter",noDot:"Kein DoT",noDoh:"Kein DoH",foot:"Jede Adresse wird aus Ihrem Browser mit einer echten DNS-Anfrage geprüft; fehlschlagende Anbieter werden ausgeblendet.",cacheInfo:"Ergebnisse werden 15 Minuten zwischengespeichert.",
+wD:"In wenigen Schritten finden wir einen passenden Anbieter, der gerade funktioniert.",wNext:"Weiter",wBack:"Zurück",wRestart:"Neu starten",wDone:"Ergebnisse anzeigen",
+w1:"Was möchtest du?",w1d:"Du kannst mehrere wählen. Jeder gewählte Schutz ist beim Anbieter garantiert.",
+w2:"Verbindungsart",w2d:"Browser und Desktop-Apps nutzen meist DoH, Android und Router meist DoT.",
+w3:"Dein Gerät",w3d:"Die Einrichtungsschritte richten sich nach dem gewählten Gerät.",
+w4:"Passende Anbieter",w4d:"Angezeigt werden nur Anbieter, die in dieser Sitzung nachweislich funktionieren.",
+wNone:"Kein funktionierender Anbieter passt zu diesen Kriterien. Versuche 'Egal' bei der Verbindungsart oder teste erneut.",
+wWhy:"Passende Schutzfunktionen",wExtra:"Zusätzlich filtert",wSteps:"Einrichtungsschritte",
+gA:"Werbung und Tracker blockieren",gM:"Malware und Phishing blockieren",gF:"Erwachsenen-Inhalte blockieren (Familie)",gP:"Datenschutz: verschlüsselt, ohne Filter",gS:"Am schnellsten, ohne Filter",
+pAny:"Egal",pAnyD:"Jede funktionierende Option wird angezeigt.",pDoh:"DoH",pDohD:"Für Browser und Desktop-Apps.",pDot:"DoT",pDotD:"Für Android Privates DNS und Router.",
+G:{android:["Einstellungen › Netzwerk & Internet › Erweitert › Privates DNS (Name je nach Hersteller verschieden)","'Hostname des privaten DNS-Anbieters' wählen","DoT-Adresse von der Karte einfügen und Speichern"],
+ios:["DoH/DoT-.mobileconfig-Profil von der Anbieter-Seite laden (Control D, AdGuard usw.)","Unter Einstellungen › Allgemein › VPN & Geräteverwaltung installieren","Dort prüfen, ob das Profil aktiv ist"],
+windows:["Einstellungen › Netzwerk & Internet › Ethernet oder WLAN › Hardwareeigenschaften › DNS-Serverzuweisung › Bearbeiten","Manuell wählen, IPv4 aktivieren und die IP des Anbieters eintragen","Verschlüsseltes DNS (DNS over HTTPS) aktivieren und die DoH-URL als Vorlage eingeben"],
+macos:["Systemeinstellungen › Netzwerk › Verbindung › Details › DNS","IP-Adressen hinzufügen","Für verschlüsseltes DNS das .mobileconfig unter Datenschutz & Sicherheit › Profile installieren"],
+linux:["In /etc/systemd/resolved.conf DNS=<IP>#<DoT-Host> und DNSOverTLS=yes eintragen","sudo systemctl restart systemd-resolved ausführen","Mit resolvectl status prüfen"],
+router:["Router-Oberfläche öffnen (z. B. 192.168.1.1)","IP-Adressen in die WAN- oder DHCP-DNS-Felder eintragen","Für verschlüsseltes DNS OpenWrt (https-dns-proxy / stubby) oder AdGuard Home nutzen","Geräte neu verbinden"]},
+ui:{}}
 };
-const ICON={ads:"block",family:"family_restroom",privacy:"visibility_off",speed:"bolt",malware:"bug_report"};
-const OS={android:"Android",ios:"iOS",windows:"Windows",macos:"macOS",linux:"Linux",router:"Router"};
-const H={tr:"Güvenli DNS'ini seç",en:"Choose your secure DNS",de:"Wähle dein sicheres DNS"};
-const LOGO=`<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect width="48" height="48" rx="14" fill="#284777"/><path d="M24 8l13 5v10c0 8-5.5 14-13 17-7.5-3-13-9-13-17V13z" fill="#AAC7FF"/><path d="M24 17L17.5 29.5h13zM24 17v8.5l-6.5 4M24 25.5l6.5 4" fill="none" stroke="#0A305F" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><g fill="#0A305F"><circle cx="24" cy="17" r="2.6"/><circle cx="17.5" cy="29.5" r="2.6"/><circle cx="30.5" cy="29.5" r="2.6"/><circle cx="24" cy="25.5" r="2"/></g></svg>`;
-const $=s=>document.querySelector(s);
-const sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
-let lang=ld("mc-lang");if(!T[lang]){const n=(navigator.language||"en").slice(0,2);lang=T[n]?n:"en"}
-let theme=ld("mc-theme")||"dark",cat="all",term="",os="android",qrP=null,qrMode="dot",wiz=new Set();
-const tr=k=>T[lang][k]||k;
 
-function setTheme(){document.documentElement.dataset.theme=theme;$("#themeI").textContent=theme==="dark"?"light_mode":"dark_mode";$("#tc").content=theme==="dark"?"#111318":"#f9f9ff"}
+const $=s=>document.querySelector(s);
+const sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+let lang=ld("mc-lang");if(!T[lang]){const n=(navigator.language||"en").slice(0,2);lang=T[n]?n:"en"}
+let theme=ld("mc-theme")||"dark",cat="all",term="",sortBy="speed",qrP=null,qrMode="dot",busy=false;
+const W={step:0,goals:new Set(),proto:"any",os:"android"};
+const ST={}; // name -> {s:'pend'|'ok'|'bad', ms, via}
+const tr=k=>T[lang][k]||k;
+const provOf=p=>p.n.split(" · ")[0];
+
+/* ---------- cache ---------- */
+const CK="mc-cache-v3",TTL=15*60e3;
+function loadCache(){try{const c=JSON.parse(ld(CK)||"null");if(c&&Date.now()-c.t<TTL&&c.r)Object.assign(ST,c.r)}catch(e){}}
+function saveCache(){try{sv(CK,JSON.stringify({t:Date.now(),r:ST}))}catch(e){}}
+
+/* ---------- DNS probe ---------- */
+const qry=n=>{const p=[0,0,1,0,0,1,0,0,0,0,0,0];n.split(".").forEach(l=>{p.push(l.length);for(const c of l)p.push(c.charCodeAt(0))});p.push(0,0,1,0,1);return new Uint8Array(p)};
+const b64u=u=>{let s="";for(const c of u)s+=String.fromCharCode(c);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")};
+const sep=u=>u+(u.includes("?")?"&":"?");
+async function probe(url){
+  const name="www.wikipedia.org",t0=performance.now();
+  try{
+    const r=await fetch(sep(url)+"dns="+b64u(qry(name)),{headers:{accept:"application/dns-message"},cache:"no-store",credentials:"omit",signal:AbortSignal.timeout(7000)});
+    if(r.ok){const b=new Uint8Array(await r.arrayBuffer());
+      if(b.length>12&&(b[2]&0x80)&&(b[3]&0x0f)===0&&((b[6]<<8)|b[7])>0)return{s:"ok",ms:Math.round(performance.now()-t0),via:"DoH"}}
+  }catch(e){}
+  try{
+    const r=await fetch(sep(url)+"name="+name+"&type=A",{headers:{accept:"application/dns-json"},cache:"no-store",credentials:"omit",signal:AbortSignal.timeout(7000)});
+    if(r.ok){const j=await r.json();if(j&&j.Status===0&&Array.isArray(j.Answer)&&j.Answer.length)return{s:"ok",ms:Math.round(performance.now()-t0),via:"JSON"}}
+  }catch(e){}
+  return{s:"bad"};
+}
+async function runTests(force){
+  if(busy)return;busy=true;
+  $("#testBtn").disabled=true;
+  if(force)for(const k in ST)delete ST[k];
+  const todo=D.filter(p=>!ST[p.n]);
+  todo.forEach(p=>ST[p.n]={s:"pend"});
+  renderAll();
+  let i=0;
+  await Promise.all(Array.from({length:8},async()=>{
+    while(i<todo.length){const p=todo[i++];
+      try{ST[p.n]=await probe(p.doh)}catch(e){ST[p.n]={s:"bad"}}
+      renderAll();}
+  }));
+  // remove stale 'pend' entries if any
+  D.forEach(p=>{if(ST[p.n]&&ST[p.n].s==="pend")ST[p.n]={s:"bad"}});
+  saveCache();busy=false;$("#testBtn").disabled=false;renderAll();
+}
+const isOk=p=>ST[p.n]&&ST[p.n].s==="ok";
+const visible=p=>!(ST[p.n]&&ST[p.n].s==="bad");
+
+/* ---------- rendering ---------- */
 function applyLang(){
   document.documentElement.lang=lang;
   document.querySelectorAll("[data-t]").forEach(e=>e.textContent=tr(e.dataset.t));
-  $("#h1").textContent=H[lang];$("#sub").textContent=tr("sub");$("#q").placeholder=tr("search");$("#none").textContent=tr("none");
-  $("#chips").innerHTML=["all",...TAGS].map(k=>chip(k,"data-c",k===cat)).join("");
-  $("#wizOpts").innerHTML=TAGS.map(k=>chip(k,"data-w",wiz.has(k))).join("");
+  $("#h1").textContent={tr:"Güvenli DNS'ini seç",en:"Choose your secure DNS",de:"Wähle dein sicheres DNS"}[lang];
+  $("#sub").textContent=tr("sub");$("#q").placeholder=tr("search");
+  $("#sort").innerHTML=[["speed","sSpeed"],["name","sName"],["prov","sProv"]].map(([v,k])=>`<option value="${v}" ${v===sortBy?"selected":""}>${tr(k)}</option>`).join("");
   $("#langMenu").innerHTML=["tr","en","de"].map(l=>`<button class="sl" data-l="${l}"><span class="icon">${l===lang?"check":""}</span>${{tr:"Türkçe",en:"English",de:"Deutsch"}[l]}</button>`).join("");
-  renderGrid();renderGuide();renderWiz();
+  $("#chips").innerHTML=["all",...TAGS].map(k=>`<button class="chip sl ${k===cat?"on":""}" data-c="${k}">${k==="all"?"":`<span class="icon">${ICON[k]}</span>`}${tr(k)}</button>`).join("");
+  $("#osTabs").innerHTML=OS.map(k=>`<button class="tab sl ${k===W.os?"on":""}" data-o="${k}">${OSN[k]}</button>`).join("");
+  renderGuide();renderAll();renderWizard();
 }
-const chip=(k,attr,on)=>`<button class="chip sl ${on?"on":""}" ${attr}="${k}">${on?'<span class="icon">check</span>':k!=="all"?`<span class="icon">${ICON[k]}</span>`:""}${tr(k)}</button>`;
+function cmp(a,b){
+  if(sortBy==="name")return a.n.localeCompare(b.n);
+  if(sortBy==="prov")return provOf(a).localeCompare(provOf(b))||a.n.localeCompare(b.n);
+  const ma=ST[a.n]&&ST[a.n].ms,mb=ST[b.n]&&ST[b.n].ms;
+  return (ma??1e9)-(mb??1e9)||a.n.localeCompare(b.n);
+}
+function renderAll(){renderGrid();renderSum();if($("#wizM").open)renderWizard()}
+function renderSum(){
+  const ok=D.filter(isOk).length,pend=D.filter(p=>ST[p.n]&&ST[p.n].s==="pend").length;
+  $("#sum").textContent=`${ok} ${tr("sum")}`+(pend?` · ${pend} ${tr("testing")}…`:"");
+  $("#count").textContent=`${ok} ${tr("count")}`;
+}
 function renderGrid(){
   const q=term.trim().toLowerCase();
-  const list=D.map((p,i)=>({p,i})).filter(({p})=>(cat==="all"||p.t.includes(cat))&&(!q||(p.n+" "+p.dot+" "+p.ip+" "+p.t.map(tr).join(" ")).toLowerCase().includes(q)));
-  $("#count").textContent=list.length+" "+tr("count");$("#none").hidden=list.length>0;
-  $("#grid").innerHTML=list.map(({p,i},k)=>cardHTML(p,i,k)).join("");
+  const list=D.filter(p=>visible(p)&&(cat==="all"||p.t.includes(cat))&&(!q||(p.n+" "+p.dot+" "+p.doh+" "+p.ip+" "+p.t.map(tr).join(" ")).toLowerCase().includes(q))).sort(cmp);
+  $("#grid").innerHTML=list.map((p,k)=>card(p,D.indexOf(p),k)).join("");
+  $("#none").hidden=list.length>0||busy;$("#none").textContent=tr("none");
 }
-function cardHTML(p,i,k){
+function stat(p){
+  const s=ST[p.n];if(!s)return"";
+  if(s.s==="pend")return`<span class="stat pend"><span class="dot"></span>${tr("testing")}…</span>`;
+  if(s.s==="ok")return`<span class="stat ok"><span class="dot"></span>${s.ms} ms · ${s.via}</span>`;
+  return"";
+}
+function card(p,i,k){
   const [a,b]=p.n.split(" · ");
-  const fld=(kind,v,l,no)=>v?`<button class="fld sl" data-a="${kind}" data-i="${i}" title="${l}"><span class="fl"><span class="lbl">${l}</span><code>${v}</code>${kind==="ip"?"":sline(i,kind)}</span><span class="icon">content_copy</span></button>`:`<div class="fld off"><span class="fl"><span class="lbl">${kind.toUpperCase()}</span><code>${no}</code></span></div>`;
+  const fld=(kind,v,l)=>`<button class="fld sl" data-a="${kind}" data-i="${i}" title="${l}"><span class="fl"><span class="lbl">${l}</span><code>${v}</code></span><span class="icon">content_copy</span></button>`;
+  const dotF=p.dot?fld("dot",p.dot,tr("copyDot")):`<div class="fld off"><span class="fl"><span class="lbl">DoT</span><code>${tr("noDot")}</code></span></div>`;
+  const dohF=p.doh?fld("doh",p.doh,tr("copyDoh")):`<div class="fld off"><span class="fl"><span class="lbl">DoH</span><code>${tr("noDoh")}</code></span></div>`;
   return `<article class="card" style="animation-delay:${Math.min(k,10)*30}ms">
-  <div class="hd"><div class="av"><span>${a[0]}</span><img src="https://www.google.com/s2/favicons?domain=${p.dom}&sz=128" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div><h2>${a}</h2>${b?`<p>${b}</p>`:""}</div></div>
+  <div class="hd"><div class="av"><span>${a[0]}</span><img src="https://www.google.com/s2/favicons?domain=${p.dom}&sz=128" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div style="min-width:0"><h2>${a}</h2>${b?`<p>${b}</p>`:""}${stat(p)}</div></div>
   <div class="tags">${p.t.map(t=>`<span class="tag"><span class="icon">${ICON[t]}</span>${tr(t)}</span>`).join("")}</div>
-  ${fld("dot",p.dot,tr("copyDot"),tr("noDot"))}${fld("doh",p.doh,tr("copyDoh"),tr("noDoh"))}
-  ${p.ip?fld("ip",p.ip,"IPv4",""):""}
+  ${dotF}${dohF}
+  ${p.ip?fld("ip",p.ip,"IPv4"):""}
   <button class="btn tonal sl" data-a="qr" data-i="${i}" ${p.dot||p.doh?"":"disabled"}><span class="icon">qr_code_2</span>${tr("qr")}</button></article>`;
 }
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.id);toast.id=setTimeout(()=>t.classList.remove("show"),2200)}
@@ -233,84 +409,114 @@ function drawQR(){
   const v=qrMode==="dot"?qrP.dot:qrP.doh;
   $("#qDot").classList.toggle("on",qrMode==="dot");$("#qDoh").classList.toggle("on",qrMode==="doh");
   $("#qDot").disabled=!qrP.dot;$("#qDoh").disabled=!qrP.doh;
-  $("#qDot .icon").style.display=qrMode==="dot"?"":"none";$("#qDoh .icon").style.display=qrMode==="doh"?"":"none";
   $("#qrV").textContent=v;$("#qrT").textContent=qrP.n;
   try{new QRious({element:$("#qrC"),value:v,size:220,level:"M"})}catch(e){}
 }
 function renderGuide(){
-  $("#osTabs").innerHTML=Object.keys(OS).map(k=>`<button class="tab sl ${k===os?"on":""}" data-o="${k}">${OS[k]}</button>`).join("");
-  $("#osBody").innerHTML=T[lang].g[os].split("|").map(s=>`<li><span>${s.replace(/(netsh dns[^|]*|DNS=\S+|DNSOverTLS=yes)/g,"<code>$1</code>")}</span></li>`).join("");
+  $("#osBody").innerHTML=T[lang].G[W.os].map(s=>`<li><span>${s}</span></li>`).join("");
+  document.querySelectorAll("#osTabs .tab").forEach(b=>b.classList.toggle("on",b.dataset.o===W.os));
 }
-function renderWiz(){
-  const el=$("#wizRes");
-  if(!wiz.size){el.innerHTML=`<p class="muted">${tr("select")}</p>`;return}
-  const sc=D.map(p=>{const m=[...wiz].filter(w=>p.t.includes(w)).length,ex=p.t.filter(t=>!wiz.has(t)).length;return{p,s:m===wiz.size?100-ex*3+(p.dot&&p.doh?2:0):m*10-ex}}).sort((a,b)=>b.s-a.s).slice(0,3);
-  el.innerHTML=sc.map(({p},k)=>`<div class="pick"><div style="min-width:0"><b>${p.n}</b>${k===0?` <span class="tag" style="margin-left:4px"><span class="icon">star</span>${tr("pick")}</span>`:""}<code>${p.dot||p.doh||p.ip}</code></div>
-  <button class="ib sl" data-wc="${p.dot||p.doh||p.ip}" aria-label="copy"><span class="icon">content_copy</span></button></div>`).join("");
-}
-const S={
-tr:{ok:"Çalışıyor",warn:"Yanıt var · içerik doğrulanamadı (CORS)",down:"Çalışmıyor / ulaşılamıyor",pend:"Test ediliyor…",dotok:"Ana makine adı çözülüyor",dotbad:"Ana makine adı çözülemedi",test:"Tümünü test et",sum:"DoH çalışıyor",sumw:"doğrulanamadı",foot:"Durumlar tarayıcınızdan canlı ölçülür. DoT için yalnızca ana makine adı çözümlenir; 853. port tarayıcıdan test edilemez."},
-en:{ok:"Working",warn:"Responded · content unverified (CORS)",down:"Down / unreachable",pend:"Testing…",dotok:"Hostname resolves",dotbad:"Hostname doesn't resolve",test:"Test all",sum:"DoH working",sumw:"unverified",foot:"Status is measured live from your browser. For DoT only the hostname is resolved; port 853 can't be tested from a browser."},
-de:{ok:"Funktioniert",warn:"Antwort erhalten · Inhalt ungeprüft (CORS)",down:"Ausgefallen / nicht erreichbar",pend:"Test läuft…",dotok:"Hostname wird aufgelöst",dotbad:"Hostname nicht auflösbar",test:"Alle testen",sum:"DoH funktioniert",sumw:"ungeprüft",foot:"Der Status wird live in Ihrem Browser gemessen. Bei DoT wird nur der Hostname aufgelöst; Port 853 ist im Browser nicht testbar."}};
-for(const l in S)Object.assign(T[l],S[l]);
-const ST={};
-function sline(i,kind){
-  const r=(ST[i]||{})[kind];if(!r||r.s==="na")return "";
-  const key=kind==="dot"?({ok:"dotok",down:"dotbad",warn:"dotbad",pend:"pend"})[r.s]:r.s;
-  return `<span class="stat ${r.s}" data-s="${kind}-${i}"><span class="dot"></span>${tr(key)}${r.s==="ok"&&r.ms!=null?" · "+r.ms+" ms":""}</span>`;
-}
-function paint(i,kind){const el=document.querySelector(`[data-s="${kind}-${i}"]`);if(el)el.outerHTML=sline(i,kind)}
-const qry=n=>{const p=[0,0,1,0,0,1,0,0,0,0,0,0];n.split(".").forEach(l=>{p.push(l.length);for(const c of l)p.push(c.charCodeAt(0))});p.push(0,0,1,0,1);return new Uint8Array(p)};
-const b64u=u=>btoa(String.fromCharCode(...u)).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
-async function testDoh(url){
-  const u=url+(url.includes("?")?"&":"?")+"dns="+b64u(qry("www.wikipedia.org")),t0=performance.now();
-  try{
-    const r=await fetch(u,{headers:{accept:"application/dns-message"},cache:"no-store",signal:AbortSignal.timeout(8000)});
-    const b=new Uint8Array(await r.arrayBuffer()),ms=Math.round(performance.now()-t0);
-    return r.ok&&b.length>12&&(b[3]&15)===0&&((b[6]<<8)|b[7])>0?{s:"ok",ms}:{s:"down"};
-  }catch(e){
-    try{await fetch(u,{mode:"no-cors",cache:"no-store",signal:AbortSignal.timeout(8000)});return{s:"warn"}}catch(_){return{s:"down"}}
+
+/* ---------- wizard ---------- */
+const GOALS=[["ads","gA"],["malware","gM"],["family","gF"],["privacy","gP"],["speed","gS"]];
+function rank(){
+  const need=[...W.goals];
+  const filt=["ads","family","malware"];
+  const out=[];
+  for(const p of D){
+    if(!isOk(p))continue;
+    if(W.proto==="dot"&&!p.dot)continue;
+    if(W.proto==="doh"&&!p.doh)continue;
+    const m=need.filter(g=>p.t.includes(g)).length;
+    if(need.length&&m<need.length)continue;
+    const extra=filt.filter(f=>p.t.includes(f)&&!W.goals.has(f));
+    const penal=(W.goals.has("privacy")||W.goals.has("speed"))?3:1;
+    const score=m*10-extra.length*penal-(ST[p.n].ms||0)/500;
+    out.push({p,score,extra,m});
   }
+  out.sort((a,b)=>b.score-a.score);
+  return out.slice(0,3);
 }
-async function testDot(h){
-  try{const r=await fetch("https://cloudflare-dns.com/dns-query?name="+h+"&type=A",{headers:{accept:"application/dns-json"},cache:"no-store",signal:AbortSignal.timeout(8000)});
-    const j=await r.json();return j.Status===0&&j.Answer&&j.Answer.length?{s:"ok"}:{s:"down"}}catch(e){return{s:"warn"}}
+function optCard(attr,val,on,title,desc,icon){
+  return `<button class="opt sl ${on?"on":""}" ${attr}="${val}" aria-pressed="${on}"><span class="icon">${icon}</span><span><b>${title}</b><span class="d">${desc}</span></span></button>`;
 }
-function sum(){
-  let ok=0,w=0,t=0;D.forEach((p,i)=>{if(!p.doh)return;t++;const r=ST[i]&&ST[i].doh;if(r&&r.s==="ok")ok++;else if(r&&r.s==="warn")w++});
-  $("#sum").textContent=`${ok}/${t} ${tr("sum")}`+(w?` · ${w} ${tr("sumw")}`:"");
+function renderWizard(){
+  const steps=4;
+  $("#wprog").style.width=((W.step+1)/steps*100)+"%";
+  const titles=[tr("w1"),tr("w2"),tr("w3"),tr("w4")];
+  const descs=[tr("w1d"),tr("w2d"),tr("w3d"),tr("w4d")];
+  let body="";
+  if(W.step===0){
+    body=`<div class="opts">${GOALS.map(([k,l])=>optCard("data-wg",k,W.goals.has(k),tr(l),"",GI[k])).join("")}</div>`;
+  }else if(W.step===1){
+    body=`<div class="opts">${[["any","pAny","pAnyD","device_hub"],["doh","pDoh","pDohD","language"],["dot","pDot","pDotD","shield_lock"]].map(([v,t,d,i])=>optCard("data-wp",v,W.proto===v,tr(t),tr(d),i)).join("")}</div>`;
+  }else if(W.step===2){
+    body=`<div class="opts">${OS.map(k=>optCard("data-wo",k,W.os===k,OSN[k],"",OSI[k])).join("")}</div>`;
+  }else{
+    const res=rank();
+    if(!res.length){body=`<div class="empty">${tr("wNone")}</div>`}
+    else body=`<div class="rgrid">${res.map(({p,extra,m})=>{
+      const i=D.indexOf(p);
+      const goalTags=[...W.goals].filter(g=>p.t.includes(g)).map(g=>`<span class="tag"><span class="icon">${ICON[g]}</span>${tr(g)}</span>`).join("");
+      const extraTags=extra.map(g=>`<span class="tag"><span class="icon">${ICON[g]}</span>${tr(g)}</span>`).join("");
+      return `<div class="rcard"><h4>${p.n}</h4>
+        <div><span class="lbl muted">${tr("wWhy")}</span><div class="why">${goalTags||"—"}</div></div>
+        ${extra.length?`<div><span class="lbl warnt">${tr("wExtra")}</span><div class="why">${extraTags}</div></div>`:""}
+        <div class="rrow">
+          ${p.dot?`<button class="btn tonal sl" data-a="dot" data-i="${i}"><span class="icon">content_copy</span>DoT</button>`:""}
+          ${p.doh?`<button class="btn tonal sl" data-a="doh" data-i="${i}"><span class="icon">content_copy</span>DoH</button>`:""}
+          <button class="btn outl sl" data-a="qr" data-i="${i}"><span class="icon">qr_code_2</span>${tr("qr")}</button>
+        </div></div>`}).join("")}</div>
+      <h3 class="lbl" style="margin:8px 0">${tr("wSteps")} · ${OSN[W.os]}</h3>
+      <div class="opts" style="margin-bottom:16px">${OS.map(k=>`<button class="tab sl ${k===W.os?"on":""}" data-wo="${k}" style="height:36px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--ol)">${OSN[k]}</button>`).join("")}</div>
+      <ol class="steps" style="padding-top:0">${T[lang].G[W.os].map(s=>`<li><span>${s}</span></li>`).join("")}</ol>`;
+  }
+  $("#wbody").innerHTML=`<div class="wcol">${W.step<3?`<h2>${titles[W.step]}</h2><p>${descs[W.step]}</p>`:`<h2>${titles[3]}</h2><p>${descs[3]}</p>`}${body}</div>`;
+  const back=W.step>0?`<button class="btn outl sl" data-wb><span class="icon">arrow_back</span>${tr("wBack")}</button>`:`<span></span>`;
+  let next;
+  if(W.step<3){
+    const dis=W.step===0&&W.goals.size===0?"disabled":"";
+    next=`<button class="btn filled sl" data-wn ${dis}>${W.step===2?tr("wDone"):tr("wNext")}<span class="icon">arrow_forward</span></button>`;
+  }else next=`<button class="btn tonal sl" data-wr><span class="icon">restart_alt</span>${tr("wRestart")}</button>`;
+  $("#wfoot").innerHTML=back+next;
+  $("#wbody").scrollTop=0;
 }
-let busy=false;
-async function runTests(){
-  if(busy)return;busy=true;const jobs=[];
-  D.forEach((p,i)=>{ST[i]={doh:{s:p.doh?"pend":"na"},dot:{s:p.dot?"pend":"na"}};
-    if(p.doh)jobs.push(async()=>{ST[i].doh=await testDoh(p.doh);paint(i,"doh")});
-    if(p.dot)jobs.push(async()=>{ST[i].dot=await testDot(p.dot);paint(i,"dot")})});
-  renderGrid();sum();let n=0;
-  await Promise.all(Array.from({length:6},async()=>{while(n<jobs.length){await jobs[n++]();sum()}}));
-  busy=false;
-}
+
+/* ---------- events ---------- */
 document.addEventListener("click",e=>{
   const m=$("#langMenu");if(!e.target.closest(".menuwrap"))m.hidden=true;
-  const b=e.target.closest("button");if(!b)return;const d=b.dataset;
-  if(d.c){cat=d.c;applyLang()}
-  else if(d.a){const p=D[d.i];if(d.a==="qr"){qrP=p;qrMode=p.dot?"dot":"doh";drawQR();$("#qrM").showModal()}else copy(p[d.a])}
-  else if(d.o){os=d.o;renderGuide()}
-  else if(d.w){wiz.has(d.w)?wiz.delete(d.w):wiz.add(d.w);applyLang()}
-  else if(d.wc)copy(d.wc);
-  else if(d.l){lang=d.l;sv("mc-lang",lang);m.hidden=true;applyLang()}
-  else if(d.open)$("#"+d.open).showModal();
-  else if("close" in d)b.closest("dialog").close();
-  else if(b.id==="qDot"){qrMode="dot";drawQR()}else if(b.id==="qDoh"){qrMode="doh";drawQR()}
-  else if(b.id==="testBtn")runTests();
+  const b=e.target.closest("button");if(!b||b.disabled)return;const d=b.dataset;
+  if(d.c){cat=d.c;applyLang();return}
+  if(d.a){const p=D[+d.i];
+    if(d.a==="qr"){qrP=p;qrMode=p.dot?"dot":"doh";drawQR();$("#qrM").showModal()}
+    else copy(p[d.a]);return}
+  if(d.o){W.os=d.o;renderGuide();return}
+  if(d.l){lang=d.l;sv("mc-lang",lang);m.hidden=true;applyLang();return}
+  if(d.open){if(d.open==="wizM")renderWizard();$("#"+d.open).showModal();return}
+  if(d.wg!==undefined){W.goals.has(d.wg)?W.goals.delete(d.wg):W.goals.add(d.wg);renderWizard();return}
+  if(d.wp!==undefined){W.proto=d.wp;renderWizard();return}
+  if(d.wo!==undefined){W.os=d.wo;renderWizard();return}
+  if("wn" in d){if(W.step<3){W.step++;renderWizard()}return}
+  if("wb" in d){if(W.step>0){W.step--;renderWizard()}return}
+  if("wr" in d){W.step=0;W.goals=new Set();W.proto="any";renderWizard();return}
+  if("close" in d){b.closest("dialog").close();return}
+  if(b.id==="qDot"){qrMode="dot";drawQR()}
+  else if(b.id==="qDoh"){qrMode="doh";drawQR()}
+  else if(b.id==="testBtn")runTests(true);
   else if(b.id==="langBtn")m.hidden=!m.hidden;
   else if(b.id==="themeBtn"){theme=theme==="dark"?"light":"dark";sv("mc-theme",theme);setTheme()}
 });
-document.querySelectorAll("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
+document.querySelectorAll("dialog").forEach(d=>d.addEventListener("click",e=>{if(e.target===d&&!d.classList.contains("full"))d.close()}));
 $("#q").addEventListener("input",e=>{term=e.target.value;renderGrid()});
+$("#sort").addEventListener("change",e=>{sortBy=e.target.value;renderGrid()});
 addEventListener("scroll",()=>$("#bar").classList.toggle("sc",scrollY>8),{passive:true});
-$("#logo").innerHTML=LOGO;$("#fav").href="data:image/svg+xml,"+encodeURIComponent(LOGO.replace("<svg ",'<svg xmlns="http://www.w3.org/2000/svg" '));
-setTheme();applyLang();runTests();
+function setTheme(){document.documentElement.dataset.theme=theme;$("#themeI").textContent=theme==="dark"?"light_mode":"dark_mode";$("#tc").content=theme==="dark"?"#111318":"#f9f9ff"}
+const LOGO=`<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect width="48" height="48" rx="14" fill="#284777"/><path d="M24 8l13 5v10c0 8-5.5 14-13 17-7.5-3-13-9-13-17V13z" fill="#AAC7FF"/><path d="M24 17L17.5 29.5h13zM24 17v8.5l-6.5 4M24 25.5l6.5 4" fill="none" stroke="#0A305F" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><g fill="#0A305F"><circle cx="24" cy="17" r="2.6"/><circle cx="17.5" cy="29.5" r="2.6"/><circle cx="30.5" cy="29.5" r="2.6"/><circle cx="24" cy="25.5" r="2"/></g></svg>`;
+$("#logo").innerHTML=LOGO;
+$("#fav").href="data:image/svg+xml,"+encodeURIComponent(LOGO.replace("<svg ",'<svg xmlns="http://www.w3.org/2000/svg" '));
+loadCache();
+setTheme();applyLang();
+if(D.some(p=>!ST[p.n]))runTests(false);
 </script>
 </body>
 </html>
